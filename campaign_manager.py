@@ -49,19 +49,19 @@ body = {
         "grant_type":"refresh_token"
         }
 
-st.write(body)
+#st.write(body)
 
 try:
     response = requests.post(url, json=body)
 
     # Checking if the request was successful
     if response.status_code == 200:
-        st.write("Request successful!")
+        #st.write("Request successful!")
         #print(response.text)
-        st.write("token is:")
+        #st.write("token is:")
         data = json.loads(response.text)
         lwa_token = data['access_token']
-        st.write(lwa_token)
+        #st.write(lwa_token)
     else:
         st.write("Request failed with status code:", response.status_code)
         st.stop()
@@ -91,10 +91,13 @@ if response.status_code == 200:
     st.write("Request successful!")
 else:
     st.write("Campaign list Request failed with status code:", response.status_code)
-    
+
+parsed_json = json.loads(response.text)
+
 ## CREATE A FUNCTION TO CREATE A TABLE OF ALL CORE FUNCTION INFORMATION
 # List to store flattened data
 flattened_data = []
+
 
 # Iterate through the JSON to extract relevant data
 for item in parsed_json['results']:
