@@ -73,7 +73,7 @@ except:
 
 
 ########################
-# PAGE BODY - CURRENT CAMPAIGN TABLE
+# PAGE BODY - LIST CURRENT CAMPAIGNS IN TABLE
 st.header('Current campaigns')
 
 # GET ALL CAMPAIGNS
@@ -121,17 +121,33 @@ for item in parsed_json['results']:
                 'img': img
             })
 
-# Create DataFrame
+# Create DataFrame of campaign data
 dfCampaigns = pd.DataFrame(flattened_data)
 
 # Display the DataFrame
 st.dataframe(dfCampaigns)
 
+######################
 # DELETE A CAMPAIGN
 def delete_campaign(campaign_id):
     # Here you would add your code to delete the campaign
-    st.success(f"Campaign with ID {campaign_id} has been deleted.")
+    url = "https://api.eu.amazonalexa.com/v1/proactive/campaigns/" + campaign_id
 
+    headers = {
+        "Host": "api.eu.amazonalexa.com",
+        "Accept": "application/json",
+        "Authorization": f"Bearer {lwa_token}"
+    }
+    
+    #Making the GET request
+    response = requests.delete(url, headers=headers)
+    
+    # Checking if the request was successful
+    if response.status_code == 202:
+        st.success(f"Campaign with ID {campaign_id} has been deleted.")
+    else:
+        st.write("Request failed with status code:", response.status_code)
+        
 st.header('Delete a campaign')
 campaign_id = st.text_input("Enter the ID of the campaign to delete:")
 if campaign_id:
