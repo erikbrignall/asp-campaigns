@@ -151,12 +151,7 @@ def delete_campaign(cid):
 st.header('Delete a campaign')
 campaign_id = st.text_input("Enter the ID of the campaign to delete:")
 if campaign_id:
-    if st.button("Delete Campaign"):
-        # Confirmation step
-        if st.checkbox("Are you sure you want to delete this campaign?"):
-            delete_campaign(campaign_id)
-        else:
-            st.warning("You need to confirm the deletion.")
+    delete_campaign(campaign_id)
 
 
 # ADD A CAMPAIGN
