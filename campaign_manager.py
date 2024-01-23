@@ -129,10 +129,10 @@ st.dataframe(dfCampaigns)
 
 ######################
 # DELETE A CAMPAIGN
-def delete_campaign(campaign_id):
+def delete_campaign(cid):
     # Here you would add your code to delete the campaign
-    url = "https://api.eu.amazonalexa.com/v1/proactive/campaigns/" + campaign_id
-
+    url = "https://api.eu.amazonalexa.com/v1/proactive/campaigns/" + cid
+    st.write(url)
     headers = {
         "Host": "api.eu.amazonalexa.com",
         "Accept": "application/json",
@@ -144,7 +144,7 @@ def delete_campaign(campaign_id):
     
     # Checking if the request was successful
     if response.status_code == 202:
-        st.success(f"Campaign with ID {campaign_id} has been deleted.")
+        st.success(f"Campaign with ID {cid} has been deleted.")
     else:
         st.write("Request failed with status code:", response.status_code)
         
