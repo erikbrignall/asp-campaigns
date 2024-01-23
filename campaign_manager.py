@@ -49,6 +49,8 @@ body = {
         "grant_type":"refresh_token"
         }
 
+st.write(body)
+
 try:
     response = requests.post(url, json=body)
 
