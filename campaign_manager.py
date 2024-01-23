@@ -5,7 +5,7 @@ import json
 import streamlit as st
 import hmac
 
-st.header('Modal - Alexa Smart Properties Campaign tools')
+st.header('Alexa Smart Properties Campaign tools')
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -90,7 +90,7 @@ response = requests.get(url, headers=headers)
 
 # Checking if the request was successful
 if response.status_code == 200:
-    st.write("Request successful!")
+    st.write("Here are the latest campaigns")
 else:
     st.write("Campaign list Request failed with status code:", response.status_code)
 
@@ -126,11 +126,21 @@ dfCampaigns = pd.DataFrame(flattened_data)
 
 # Display the DataFrame
 st.dataframe(dfCampaigns)
-    
-# review data for list of campaigns
-#review_data = response.text
 
 # DELETE A CAMPAIGN
+def delete_campaign(campaign_id):
+    # Here you would add your code to delete the campaign
+    st.success(f"Campaign with ID {campaign_id} has been deleted.")
+
+st.header('Delete a campaign')
+campaign_id = st.text_input("Enter the ID of the campaign to delete:")
+if campaign_id:
+    if st.button("Delete Campaign"):
+        # Confirmation step
+        if st.checkbox("Are you sure you want to delete this campaign?"):
+            delete_campaign(campaign_id)
+        else:
+            st.warning("You need to confirm the deletion.")
 
 
 # ADD A CAMPAIGN
