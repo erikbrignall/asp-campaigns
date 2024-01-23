@@ -37,7 +37,6 @@ if not check_password():
 # FETCH UP TO DATE API TOKEN 
 url = "https://api.amazon.com/auth/o2/token"
 
-
 rtoken = st.secrets["rtoken"]
 client_id = st.secrets["client_id"]
 client_secret =  st.secrets["client_secret"]
@@ -53,7 +52,7 @@ body = {
 try:
     response = requests.post(url, json=body)
 
-        # Checking if the request was successful
+    # Checking if the request was successful
     if response.status_code == 200:
         print("Request successful!")
         #print(response.text)
@@ -63,8 +62,10 @@ try:
         print(lwa_token)
     else:
         print("Request failed with status code:", response.status_code)
+        st.stop()
 except:
     print("well that didn't work hmmm")
+    st.stop()
 
 
 ########################
