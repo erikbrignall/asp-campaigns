@@ -54,17 +54,17 @@ try:
 
     # Checking if the request was successful
     if response.status_code == 200:
-        print("Request successful!")
+        st.write("Request successful!")
         #print(response.text)
-        print("token is:")
+        st.write("token is:")
         data = json.loads(response.text)
         lwa_token = data['access_token']
-        print(lwa_token)
+        st.write(lwa_token)
     else:
-        print("Request failed with status code:", response.status_code)
+        st.write("Request failed with status code:", response.status_code)
         st.stop()
 except:
-    print("well that didn't work hmmm")
+    st.write("well that didn't work hmmm")
     st.stop()
 
 
@@ -86,9 +86,9 @@ response = requests.get(url, headers=headers)
 
 # Checking if the request was successful
 if response.status_code == 200:
-    print("Request successful!")
+    st.write("Request successful!")
 else:
-    print("Request failed with status code:", response.status_code)
+    st.write("Campaign list Request failed with status code:", response.status_code)
     
 ## CREATE A FUNCTION TO CREATE A TABLE OF ALL CORE FUNCTION INFORMATION
 # List to store flattened data
